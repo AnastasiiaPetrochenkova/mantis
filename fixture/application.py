@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
 
+from fixture.mantis_projects import ProjectHelper
 from fixture.session import SessionHelper
-
-
 
 
 class Application:
@@ -20,6 +19,7 @@ class Application:
             raise ValueError("Unrecognized browser %s" % browser)
         self.session = SessionHelper(self)
         self.base_url = base_url
+        self.mantis_projects = ProjectHelper(self)
 
     def is_valid(self):
         try:

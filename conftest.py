@@ -1,7 +1,9 @@
 import json
-from fixture.application import Application
-import pytest
 import os.path
+
+import pytest
+
+from fixture.application import Application
 
 fixture = None
 target = None
@@ -14,6 +16,7 @@ def load_config(file):
         with open(config_file) as config_file:
             target = json.load(config_file)
     return target
+
 
 @pytest.fixture
 def app(request):
@@ -30,8 +33,10 @@ def stop(request):
     def fin():
         fixture.session.ensure_logout()
         fixture.destroy()
+
     request.addfinalizer(fin)
     return fixture
+
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action='store', default='chrome')
